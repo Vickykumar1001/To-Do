@@ -4,7 +4,7 @@ const date=require(__dirname+"/date.js");
 const _ = require("lodash");
 const mongoose = require("mongoose");
 mongoose.set('strictQuery',false);
-mongoose.connect("mongodb://localhost:27017/todolistDB",{useNewUrlParser: true});
+mongoose.connect("mongodb+srv://vickykumar1001:Vicky%40BT21EC038@cluster0.xwttq4y.mongodb.net/todolistDB" ,{useNewUrlParser: true});
 
 const app=express();
 app.use(bodyParser.urlencoded({extended:true}));
@@ -44,8 +44,9 @@ app.get("/",function(req , res){
                 }
             });
             res.redirect("/");
-        }
+        } else{
         res.render("list",{ListTitle: day, newListItems: items});
+        }
     });
 });
 
@@ -111,7 +112,8 @@ app.post("/delete",function(req,res){
         });
     }
     
-})
-app.listen(3000,function(){
+});
+const port = process.env.PORT || 3000;
+app.listen(port,function(){
     console.log("Server is running on port 3000");
 })
